@@ -1,37 +1,8 @@
-const {Router} = require('express');
-const axios = require('axios');
-const querystring  = require('querystring');
-
+const { Router } = require("express");
 const scraper = Router();
+const invoice_controller = require("../controllers/invoice.controller");
+const auth_middleware = require("../middleware/auth.middleware");
 
-function sendInvoice(data){
-    return new Promise((reslove, reject) => {
-     axios.post('https://mapr.tax.gov.me/ic/api/verifyInvoice', querystring .stringify(data))
-        .then(res => {
-            // console.log(res.data);
-            reslove(res.data.items);
-        }).catch(err => {
-            console.log(err);
-            reject(new Error(err.message));
-        })
-    })
-}
-function checkWord(data){
-       const validated = data.filter(item => item.name.includes('DOJC'))
-        if(validated.length > 0){
-            return validated[0]
-        } else {
-            return 0
-        }
-}
-scraper.post('/verifyInvoice', (req, res) => {
+scraper.post("/verifyInvoice", auth_middleware.verifyToken, invoice_controller.verifyInvoice);
 
-    sendInvoice(req.body).then((results)=> {
-        res.send(checkWord(results))
-    });
-    
-    
-});
-
-
-module.exports = scraper
+module.exports = scraper;
