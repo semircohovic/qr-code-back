@@ -12,6 +12,8 @@ const router = require("./routes");
 
 const app = express();
 
+app.enable("trust proxy");
+
 app.use(morgan("short"));
 
 app.use(express.json());
