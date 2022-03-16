@@ -1,6 +1,7 @@
 version: "3"
 services:
   nginx:
+    image: nginx:stable-alpine
     ports:
       - "80:80"
   node-app:
@@ -14,6 +15,6 @@ services:
       - MONGO_PASSWORD=${MONGO_PASSWORD}
     command: node index.js
   mongo:
-    entrypoint:
+    environment:
       - MONGO_INITDB_ROOT_USERNAME=${MONGO_INITDB_ROOT_USERNAME}
       - MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD}
