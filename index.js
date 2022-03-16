@@ -1,7 +1,7 @@
 require("dotenv").config();
 
 const express = require("express");
-const morgan = require("morgan");
+// const morgan = require("morgan");
 const cors = require("cors");
 
 const InitiateMongoServer = require("./config/db.config");
@@ -14,7 +14,7 @@ const app = express();
 
 app.enable("trust proxy");
 
-app.use(morgan("short"));
+// app.use(morgan("short"));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
