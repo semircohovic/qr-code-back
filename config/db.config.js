@@ -22,7 +22,7 @@ const {
 //   }
 // };
 
-const MONGOURI = `mongodb://${MONGO_USER}:${MONGO_PASSWORD}@${MONGO_IP}:${MONGO_PORT}/backend-qr`;
+const MONGOURI = `mongodb://${MONGO_USER}:${MONGO_PASSWORD}@${MONGO_IP}:${MONGO_PORT}/?authSource=admin`;
 
 const InitiateMongoServer = () => {
   mongoose
